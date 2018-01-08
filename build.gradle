@@ -2,15 +2,13 @@
 
 buildscript {
 
-    ext.kotlin_version = '1.1.51'
+    ext.kotlin_version = '1.2.10'
     ext.version_code = 101
     ext.version_string = '1.0.0-alhpa5'
-    ext.target_sdk = 26
-    ext.compile_sdk = 26
-    ext.build_tools = '26.0.2'
-    ext.kotlin_version = '1.1.51'
-    ext.support_library = '26.1.0'
-    ext.architecture_components = "1.0.0-rc1"
+    ext.target_sdk = 27
+    ext.compile_sdk = 27
+    ext.support_library = '27.0.2'
+    ext.architecture_components = "1.0.0"
     ext.dokka_version = '0.9.14'
 
     repositories {
@@ -18,7 +16,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
