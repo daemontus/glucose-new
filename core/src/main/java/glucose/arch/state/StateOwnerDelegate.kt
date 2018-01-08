@@ -1,7 +1,7 @@
 package glucose.arch.state
 
 import android.os.Bundle
-import glucose.arch.PresenterOwner
+import glucose.arch.PresenterGroup
 import glucose.arch.lifecycleError
 
 /**
@@ -11,7 +11,9 @@ import glucose.arch.lifecycleError
  * to store structured data (using StateOwner) and subsequently be saved into a simple
  * [Bundle] using the [State] interface.
  *
- * This class is especially useful when implementing custom [PresenterOwner]s.
+ * This class is especially useful when implementing custom [PresenterGroup]s.
+ *
+ * //TODO: Don't allow access to state when it's not loaded yet.
  */
 class StateOwnerDelegate(private val key: String) : StateOwner, State {
 

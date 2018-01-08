@@ -3,6 +3,7 @@ package glucose.arch.state
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.SparseArray
+import java.io.Serializable
 
 internal object Bundlers {
 
@@ -59,6 +60,11 @@ internal object Bundlers {
     fun <P: Parcelable> parcelableSparseArray() = object : Bundler<SparseArray<P>> {
         override fun Bundle.putValue(key: String, value: SparseArray<P>) = putSparseParcelableArray(key, value)
         override fun Bundle.getValue(key: String, default: SparseArray<P>): SparseArray<P> = getSparseParcelableArray(key) ?: default
+    }
+
+    fun <S: Serializable> serializable(clazz: Class<S>) = object : Bundler<S> {
+        override fun Bundle.putValue(key: String, value: S) = putSerializable(key, value)
+        override fun Bundle.getValue(key: String, default: S): S = clazz.cast(getSerializable(key) ?: default)
     }
 
 }

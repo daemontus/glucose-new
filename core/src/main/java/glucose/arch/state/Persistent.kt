@@ -3,6 +3,7 @@ package glucose.arch.state
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.SparseArray
+import java.io.Serializable
 
 /**
  * Delegate providers for various persistent state properties.
@@ -33,5 +34,8 @@ object Persistent {
 
     fun <P: Parcelable> parcelableSparseArray(default: SparseArray<P>)
             = StatePropertyLoader<SparseArray<P>>(::StateProperty, Bundlers.parcelableSparseArray(), default)
+
+    fun <S: Serializable> serializable(default: S, clazz: Class<S>)
+            = StatePropertyLoader<S>(::StateProperty, Bundlers.serializable(clazz), default)
 
 }
