@@ -1,14 +1,11 @@
 package com.github.daemontus.core;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import glucose.arch.Presenter;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -21,8 +18,5 @@ public class ExampleInstrumentedTest {
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-
-        Presenter presenter = new Presenter();
-        presenter.onCreate(new Bundle());
     }
 }

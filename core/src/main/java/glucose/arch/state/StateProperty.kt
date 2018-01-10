@@ -1,6 +1,7 @@
 package glucose.arch.state
 
 import android.os.Bundle
+import glucose.arch.lifecycleError
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -16,7 +17,11 @@ class StateProperty<T : Any>(
         bundler: Bundler<T>
 ) : State, Bundler<T> by bundler, ReadOnlyProperty<StateOwner, T>, ReadWriteProperty<StateOwner, T> {
 
-    private var value: T = default
+    private var _value: T? = null
+
+    private var value: T
+        get() = _value ?: lifecycleError("Accessing state property which is not initialized.")
+        set(value) { _value = value }
 
     override fun getValue(thisRef: StateOwner, property: KProperty<*>): T = this.value
 
@@ -31,4 +36,5 @@ class StateProperty<T : Any>(
     override fun writeToBundle(data: Bundle) {
         data.putValue(key, value)
     }
+
 }

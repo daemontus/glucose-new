@@ -18,24 +18,24 @@ object Persistent {
     val String = string()
     val Bundle = bundle()
 
-    fun boolean(default: Boolean = false) = StatePropertyLoader(::StateProperty, Bundlers.Boolean, default)
-    fun int(default: Int = 0) = StatePropertyLoader(::StateProperty, Bundlers.Int, default)
-    fun long(default: Long = 0) = StatePropertyLoader(::StateProperty, Bundlers.Long, default)
-    fun float(default: Float = 0.0f) = StatePropertyLoader(::StateProperty, Bundlers.Float, default)
-    fun double(default: Double = 0.0) = StatePropertyLoader(::StateProperty, Bundlers.Double, default)
-    fun string(default: String = "") = StatePropertyLoader(::StateProperty, Bundlers.String, default)
-    fun bundle(default: Bundle = Bundle()) = StatePropertyLoader(::StateProperty, Bundlers.Bundle, default)
+    fun boolean(default: Boolean = false) = StatePropertyLoader(Bundlers.Boolean, default)
+    fun int(default: Int = 0) = StatePropertyLoader(Bundlers.Int, default)
+    fun long(default: Long = 0) = StatePropertyLoader(Bundlers.Long, default)
+    fun float(default: Float = 0.0f) = StatePropertyLoader(Bundlers.Float, default)
+    fun double(default: Double = 0.0) = StatePropertyLoader(Bundlers.Double, default)
+    fun string(default: String = "") = StatePropertyLoader(Bundlers.String, default)
+    fun bundle(default: Bundle = Bundle()) = StatePropertyLoader(Bundlers.Bundle, default)
 
     fun <P: Parcelable> parcelable(default: P)
-            = StatePropertyLoader(::StateProperty, Bundlers.parcelable(), default)
+            = StatePropertyLoader(Bundlers.parcelable(), default)
 
     fun <P: Parcelable> parcelableArrayList(default: ArrayList<P>)
-            = StatePropertyLoader<ArrayList<P>>(::StateProperty, Bundlers.parcelableArrayList(), default)
+            = StatePropertyLoader<ArrayList<P>>(Bundlers.parcelableArrayList(), default)
 
     fun <P: Parcelable> parcelableSparseArray(default: SparseArray<P>)
-            = StatePropertyLoader<SparseArray<P>>(::StateProperty, Bundlers.parcelableSparseArray(), default)
+            = StatePropertyLoader<SparseArray<P>>(Bundlers.parcelableSparseArray(), default)
 
     fun <S: Serializable> serializable(default: S, clazz: Class<S>)
-            = StatePropertyLoader<S>(::StateProperty, Bundlers.serializable(clazz), default)
+            = StatePropertyLoader(Bundlers.serializable(clazz), default)
 
 }

@@ -18,7 +18,9 @@ import glucose.arch.lifecycleError
 class StateOwnerDelegate(private val key: String) : StateOwner, State {
 
     private val states = HashSet<State>()
-    private var isInitialized = false
+
+    override var hasState: Boolean = false
+        private set
 
     /* State */
 
@@ -33,15 +35,18 @@ class StateOwnerDelegate(private val key: String) : StateOwner, State {
     /* State Owner */
 
     override fun registerState(state: State) {
-        if (isInitialized) lifecycleError("Cannot register state. Component already initialized")
+        if (hasState) lifecycleError("Cannot register state. Component already initialized.")
         states.add(state)
     }
 
     override fun initFromBundle(data: Bundle) {
+        if (hasState) lifecycleError("Cannot load state. Component already initialized.")
+        hasState = true
         states.forEach { it.readFromBundle(data) }
     }
 
     override fun saveToBundle(): Bundle {
+        if (!hasState) lifecycleError("Cannot save state. Component not initialized.")
         val result = Bundle()
         states.forEach { it.writeToBundle(result) }
         return result
